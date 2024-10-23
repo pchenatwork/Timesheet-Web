@@ -6,13 +6,14 @@ import reportWebVitals from "./reportWebVitals";
 
 import { PublicClientApplication } from "@azure/msal-browser";
 import { MsalProvider } from "@azure/msal-react";
-import { getMsalConfig } from "./authConfig";
+import { getMsalConfig, msalInstance } from "./authConfig";
 
-export const msalInstance = new PublicClientApplication(getMsalConfig());
+//export const msalInstance = new PublicClientApplication(getMsalConfig());
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+// 2024/10/23
 // <StrictMode> : https://github.com/AzureAD/microsoft-authentication-library-for-js/issues/3418
 root.render(
   <React.StrictMode>
