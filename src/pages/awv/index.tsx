@@ -3,7 +3,7 @@ import { _formDefinition } from "./_formDefinition";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 
 import TextField from "@mui/material/TextField";
-import { IElementRenderer, ISection, ISectionElement } from "./form.interfaces";
+import { TElementRenderer, ISection, ISectionElement } from "./form.interfaces";
 import SectionTitle from "./SectionTitle";
 import { renderTextField } from "./TextField";
 
@@ -18,6 +18,11 @@ export const ElectronicAwvForm: FC<IProps> = (props) => {
   const onMySubmit = (data: any) => alert(JSON.stringify(data));
 
   const formSections: ISection[] = _formDefinition?.form.sections; //.filter((x) => x.printOnly !== true)
+
+  
+ const elementRenderers_2 : Record<string, object> =  {
+  textField: renderTextField,
+}
 
   const elementRenderers: any = {
     /*
@@ -61,19 +66,16 @@ export const ElectronicAwvForm: FC<IProps> = (props) => {
     */
   };
 
-  const renderSectionElement = (
+  const renderSectionElement: TElementRenderer = (
     element: ISectionElement,
     key: string,
     parentName?: string
   ) => {
-    const renderer = elementRenderers[element.$type] as (
+    //const renderer = elementRenderers[element.$type] as (
+    const renderer = elementRenderers_2[element.$type] as (
       element: ISectionElement,
       key: string,
-      renderSectionElement: (
-        element: ISectionElement,
-        key: string,
-        parentName?: string
-      ) => JSX.Element,
+      renderer: TElementRenderer,
       parentName?: string
     ) => JSX.Element;
     return (
@@ -81,20 +83,25 @@ export const ElectronicAwvForm: FC<IProps> = (props) => {
       renderer && renderer(element, key, renderSectionElement, parentName)
     );
   };
-  
-  const renderSectionElement_: IElementRenderer = (
+
+  /*
+  const _renderSectionElement: IElementRenderFunc = (
     element: ISectionElement,
     key: string,
     parentName?: string
-  )   => {
-    const renderer : IElementRenderer = elementRenderers[element.$type] 
+  ) => {
+    const renderer = elementRenderers[element.$type] as (
+      element: ISectionElement,
+      key: string,
+      renderSectionElement: IElementRenderFunc,
+      parentName?: string
+    ) => JSX.Element;
     return (
       //evaluateCondition(element.condition, methods.watch, parentName) &&
-      renderer && renderer(element, key,parentName)
+      renderer && renderer(element, key, _renderSectionElement, parentName)
     );
   };
-  
-  /*
+
   const renderSectionElement_2 = (
     element: ISectionElement,
     key: string,
@@ -160,7 +167,7 @@ export const ElectronicAwvForm: FC<IProps> = (props) => {
                         }
                             */
                   >
-                    {renderSectionElement_(
+                    {renderSectionElement(
                       x,
                       `form-element-${sectionIndex}-${elementIndex}`
                     )}

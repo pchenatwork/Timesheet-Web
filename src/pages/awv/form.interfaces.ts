@@ -1,7 +1,20 @@
+/*
 export interface IElementRenderer {
   (element: ISectionElement, key: string, parentName?:string) : JSX.Element;
 }
-export type IElementRendererFun = (element: ISectionElement, key: string, parentName?:string) => JSX.Element;
+Use type:
+For primitive types, union types, and intersection types:
+For function types.
+For tuple types.
+
+Use interface:
+For defining the structure of objects.
+ */
+export type TElementRenderer = (
+  element: ISectionElement,
+  key: string,
+  parentName?: string
+) => JSX.Element;
 
 export interface ICondition {
   $type: string;
