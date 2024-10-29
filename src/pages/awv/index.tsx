@@ -3,7 +3,7 @@ import { _formDefinition } from "./_formDefinition";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 
 import TextField from "@mui/material/TextField";
-import { ISection, ISectionElement } from "./form.interfaces";
+import { IElementRenderer, ISection, ISectionElement } from "./form.interfaces";
 import SectionTitle from "./SectionTitle";
 import { renderTextField } from "./TextField";
 
@@ -81,7 +81,45 @@ export const ElectronicAwvForm: FC<IProps> = (props) => {
       renderer && renderer(element, key, renderSectionElement, parentName)
     );
   };
-
+  
+  const renderSectionElement_: IElementRenderer = (
+    element: ISectionElement,
+    key: string,
+    parentName?: string
+  )   => {
+    const renderer : IElementRenderer = elementRenderers[element.$type] 
+    return (
+      //evaluateCondition(element.condition, methods.watch, parentName) &&
+      renderer && renderer(element, key,parentName)
+    );
+  };
+  
+  /*
+  const renderSectionElement_2 = (
+    element: ISectionElement,
+    key: string,
+    parentName?: string
+  ) => {
+    const x = elementRenderers[element.$type]
+    const y = x as (
+      element: ISectionElement,
+      key: string,
+      renderSectionElement: IElementRenderer,
+      parentName?: string
+    ) => JSX.Element;
+    debugger
+    const renderer = elementRenderers[element.$type] as (
+      element: ISectionElement,
+      key: string,
+      renderSectionElement: IElementRenderer,
+      parentName?: string
+    ) => JSX.Element;
+    return (
+      //evaluateCondition(element.condition, methods.watch, parentName) &&
+      renderer && renderer(element, key, renderSectionElement_2, parentName)
+    );
+  };
+  */
 
   return (
     <>
@@ -122,7 +160,7 @@ export const ElectronicAwvForm: FC<IProps> = (props) => {
                         }
                             */
                   >
-                    {renderSectionElement(
+                    {renderSectionElement_(
                       x,
                       `form-element-${sectionIndex}-${elementIndex}`
                     )}

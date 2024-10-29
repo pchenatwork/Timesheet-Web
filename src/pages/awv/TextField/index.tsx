@@ -1,7 +1,7 @@
 
 import {default as MuiTextField} from '@mui/material/TextField';
 import { FC } from 'react';
-import { ISectionElement, ITextField } from '../form.interfaces';
+import { IElementRenderer, ISectionElement, ITextField } from '../form.interfaces';
 
 interface IProps {
     name: string
@@ -20,7 +20,7 @@ const TextField: FC<IProps> = (props) => (
     />
 )
 
-export const renderTextField = (element: ISectionElement, key: string) => {
+export const renderTextField : IElementRenderer = (element: ISectionElement, key: string) => {
     const textFieldProps = element as ITextField
     return <TextField key={key} {...textFieldProps}  />
 }

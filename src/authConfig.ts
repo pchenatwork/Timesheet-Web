@@ -107,7 +107,6 @@ const loginRequest_B2C = {
 // };
 
 const getConfig = (aadConfig: any, b2cConfig: any): any => {
-  debugger;
   switch (process.env.REACT_APP_IDENTITY_PROVIDER) {
     case "AAD":
       return aadConfig;

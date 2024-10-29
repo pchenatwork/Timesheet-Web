@@ -1,3 +1,8 @@
+export interface IElementRenderer {
+  (element: ISectionElement, key: string, parentName?:string) : JSX.Element;
+}
+export type IElementRendererFun = (element: ISectionElement, key: string, parentName?:string) => JSX.Element;
+
 export interface ICondition {
   $type: string;
   fieldName: string;
