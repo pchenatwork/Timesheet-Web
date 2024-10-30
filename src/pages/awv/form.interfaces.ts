@@ -66,3 +66,5 @@ export interface ITextField extends IInputControl {
   //?? validationRegex?: string
   //?? validationRegexErrorMessage: string
 }
+
+export interface IDatePicker extends ILabeledControl {}

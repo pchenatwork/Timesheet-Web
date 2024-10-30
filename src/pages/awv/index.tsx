@@ -6,6 +6,7 @@ import TextField from "@mui/material/TextField";
 import { TElementRenderer, ISection, ISectionElement } from "./form.interfaces";
 import SectionTitle from "./SectionTitle";
 import { renderTextField } from "./TextField";
+import { renderDatePicker } from "./DatePicker";
 
 interface IProps {
   readOnly: boolean;
@@ -33,7 +34,6 @@ export const ElectronicAwvForm: FC<IProps> = (props) => {
     commentedScoredMultipleChoiceList: renderCommentedScoredMultipleChoiceList,
     datedBooleanList: renderDatedBooleanList,
     dateOfBirthPicker: renderDateOfBirthPicker,
-    datePicker: renderDatePicker,
     diagnosisHeading: renderDiagnosisHeading,
     dropDownList: renderDropDownList,
     dropDownListBoolean: renderDropDownListBoolean,
@@ -59,6 +59,7 @@ export const ElectronicAwvForm: FC<IProps> = (props) => {
     sectionElementGroup: renderSectionElementGroup,
     standaloneLabel: renderStandaloneLabel,
     textArea: renderTextArea, */
+    datePicker: renderDatePicker,
     textField: renderTextField,
     /*
     twoColumnPanel: renderTwoColumnPanel,
@@ -71,8 +72,8 @@ export const ElectronicAwvForm: FC<IProps> = (props) => {
     key: string,
     parentName?: string
   ) => {
-    //const renderer = elementRenderers[element.$type] as (
-    const renderer = elementRenderers_2[element.$type] as (
+    const renderer = elementRenderers[element.$type] as (
+    //const renderer = elementRenderers_2[element.$type] as (
       element: ISectionElement,
       key: string,
       renderer: TElementRenderer,
@@ -167,10 +168,7 @@ export const ElectronicAwvForm: FC<IProps> = (props) => {
                         }
                             */
                   >
-                    {renderSectionElement(
-                      x,
-                      `form-element-${sectionIndex}-${elementIndex}`
-                    )}
+                    {renderSectionElement(x,`form-element-${sectionIndex}-${elementIndex}`)}
                   </fieldset>
                 ))}
             </div>
