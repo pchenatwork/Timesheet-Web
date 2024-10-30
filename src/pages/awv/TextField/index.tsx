@@ -28,7 +28,8 @@ const MyTextField: FC<IProps> = (props) => {
       label={props.label}
       placeholder={props.placeholder ?? props.label}
       disabled={props.readonly ?? false}
-      {...register(props.name)}  // this will yield {"name": "props.name", ref: f(), onBlur: f(), onChangeL f() }
+      {...register(props.name)} // this will yield {"name": "props.name", ref: f(), onBlur: f(), onChangeL f() }
+      error={true}
     />
   );
 };
@@ -38,5 +39,25 @@ export const renderTextField: TElementRenderer = (
   key: string
 ) => {
   const textFieldProps = element as ITextField;
+  var x = { ...textFieldProps };
+  debugger;
   return <MyTextField key={key} {...textFieldProps} />;
 };
+
+/*
+export const renderElement<T: I, O> : TElementRenderer = (
+    element: ISectionElement,
+    key: string
+  ) => {
+    const textFieldProps = element as T;
+    return <MyTextField key={key} {...textFieldProps} />;
+  };
+
+  export type PropsWithForwardedState<
+  State,
+  Props extends Record<string, unknown>,
+> = Omit<Props, 'value' | 'setValue'> & {
+  value: State;
+  setValue: Dispatch<SetStateAction<State>>;
+};
+*/
