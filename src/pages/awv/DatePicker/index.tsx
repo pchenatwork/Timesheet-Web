@@ -16,7 +16,7 @@ interface IProps {
   readonly?: boolean;
 }
 
-const MyTimePicker: FC<IProps> = (props) => {
+const MyTimePicker: FC<IDatePicker> = (props) => {
   const {
     register,
     control,
@@ -43,7 +43,7 @@ const MyTimePicker: FC<IProps> = (props) => {
   );
 };
 
-const MyDatePicker: FC<IProps> = (props) => {
+const MyDatePicker: FC<IDatePicker> = (props) => {
   const {
     register,
     control,

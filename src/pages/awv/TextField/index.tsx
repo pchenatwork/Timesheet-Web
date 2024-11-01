@@ -8,14 +8,16 @@ import {
 import { useFormContext } from "react-hook-form";
 import { TextField } from "@mui/material";
 
+/*
 interface IProps {
   name: string;
-  label: string;
+  label?: string;
   placeholder?: string;
   readonly?: boolean;
 }
+  */
 
-const MyTextField: FC<IProps> = (props) => {
+const MyTextField: FC<ITextField> = (props) => {
   const {
     register,
     //formState: { errors },
@@ -39,8 +41,8 @@ export const renderTextField: TElementRenderer = (
   key: string
 ) => {
   const textFieldProps = element as ITextField;
-  var x = { ...textFieldProps };
-  debugger;
+  //var x = { ...textFieldProps };
+  //debugger;
   return <MyTextField key={key} {...textFieldProps} />;
 };
 

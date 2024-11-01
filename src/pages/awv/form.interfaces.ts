@@ -21,15 +21,6 @@ export interface ICondition {
   fieldName: string;
 }
 
-export interface ISumCondition extends ICondition {
-  minValue: number;
-  maxValue: number;
-}
-
-export interface IValueCondition extends ICondition {
-  values: any[];
-}
-
 export interface ISectionElement {
   $type: string;
   condition?: ICondition;
@@ -39,8 +30,8 @@ export interface ISection {
   title: string;
   description?: string;
   condition?: ICondition;
-  elements?: ISectionElement[];
-  //  hideInNavigationSidebar?: boolean;
+  elements?: ISectionElement[] | null;
+  hideInNavigationSidebar?: boolean;
   // printOnly?: boolean;
 }
 
@@ -48,23 +39,24 @@ export interface IForm {
   sections: ISection[];
 }
 
-export interface IControl extends ISectionElement {
+interface IControlBase extends ISectionElement {
   name: string;
-  //isOptional: boolean;
+  label?: string;
+  readonly?: boolean;
+  explanatoryNote?: string;
+  //isOptional: boolean; // Notes: isOptional is used for validation
   // missingValueErrorMessage: string;
 }
 
-export interface ILabeledControl extends IControl {
-  label: string;
-  //?? subLabel: string
-}
-export interface IInputControl extends ILabeledControl {
+export interface IInputControl extends IControlBase {
   placeholder?: string;
-  readonly?: boolean;
 }
 export interface ITextField extends IInputControl {
-  //?? validationRegex?: string
-  //?? validationRegexErrorMessage: string
+  validationRegex?: string;
+  validationRegexErrorMessage?: string;
 }
+export interface IDatePicker extends IInputControl {}
 
-export interface IDatePicker extends ILabeledControl {}
+export interface ITwoColumnPanel extends ISectionElement {
+  elements: ISectionElement[];
+}

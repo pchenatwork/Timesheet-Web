@@ -7,6 +7,8 @@ import { TElementRenderer, ISection, ISectionElement } from "./form.interfaces";
 import SectionTitle from "./SectionTitle";
 import { renderTextField } from "./TextField";
 import { renderDatePicker } from "./DatePicker";
+import { renderFormSectionElement } from "./form.renderer";
+import { renderTwoColumnPanel } from "./TwoColumnPanel";
 
 interface IProps {
   readOnly: boolean;
@@ -18,12 +20,12 @@ export const ElectronicAwvForm: FC<IProps> = (props) => {
   // const { register, control, getValues } = useFormContext();
   const onMySubmit = (data: any) => alert(JSON.stringify(data));
 
+  //const formSections: ISection[] = _formDefinition?.form.sections; //.filter((x) => x.printOnly !== true)
   const formSections: ISection[] = _formDefinition?.form.sections; //.filter((x) => x.printOnly !== true)
 
-  
- const elementRenderers_2 : Record<string, object> =  {
-  textField: renderTextField,
-}
+  const elementRenderers_2: Record<string, object> = {
+    textField: renderTextField,
+  };
 
   const elementRenderers: any = {
     /*
@@ -61,10 +63,9 @@ export const ElectronicAwvForm: FC<IProps> = (props) => {
     textArea: renderTextArea, */
     datePicker: renderDatePicker,
     textField: renderTextField,
-    /*
-    twoColumnPanel: renderTwoColumnPanel,
+    twoColumnPanel: renderTwoColumnPanel /*
     verticalRadioSelection: renderVerticalRadioSelection
-    */
+    */,
   };
 
   const renderSectionElement: TElementRenderer = (
@@ -72,8 +73,9 @@ export const ElectronicAwvForm: FC<IProps> = (props) => {
     key: string,
     parentName?: string
   ) => {
+    debugger;
     const renderer = elementRenderers[element.$type] as (
-    //const renderer = elementRenderers_2[element.$type] as (
+      //const renderer = elementRenderers_2[element.$type] as (
       element: ISectionElement,
       key: string,
       renderer: TElementRenderer,
@@ -168,7 +170,16 @@ export const ElectronicAwvForm: FC<IProps> = (props) => {
                         }
                             */
                   >
-                    {renderSectionElement(x,`form-element-${sectionIndex}-${elementIndex}`)}
+                    {
+                      renderSectionElement(
+                        x,
+                        `form-element-${sectionIndex}-${elementIndex}`
+                      )
+                      /* renderFormSectionElement(
+                        x,
+                        `form-element-${sectionIndex}-${elementIndex}`
+                      )*/
+                    }
                   </fieldset>
                 ))}
             </div>

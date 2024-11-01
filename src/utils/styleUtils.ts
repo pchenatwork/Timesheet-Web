@@ -27,3 +27,24 @@ export const UI_COLORS: Record<string, string> =  {
     yellow: '#F2A818',
     goldenOcher: '#B0892A'
 }
+
+
+export const SIZE = {
+    MOBILE: 375,
+    TABLET: 768,
+    TABLET_LANDSCAPE: 1024,
+    DESKTOP: 1440,
+    DESKTOP_TALL: 1100
+}
+export const DEVICE = {
+    mobile: `@media screen and (min-width: ${SIZE.MOBILE}px)`,
+    tablet: `@media screen and (min-width: ${SIZE.TABLET}px)`,
+    tablet_landscape: `@media screen and (min-width: ${SIZE.TABLET_LANDSCAPE}px)`,
+    desktop: `@media screen and (min-width: ${SIZE.DESKTOP}px)`,
+    desktop_tall: `@media screen and (min-height: ${SIZE.DESKTOP_TALL}px)`
+}
+
+export const hideMainWindowScrollbars = (hide: boolean) => {
+    if (hide) document.body.style.overflow = 'hidden'
+    else document.body.style.overflow = 'visible'
+}

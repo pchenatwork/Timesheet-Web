@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { pxToRem, UI_COLORS } from "../../utils/styleUtils";
+import { DEVICE, pxToRem, UI_COLORS } from "../../utils/styleUtils";
 
 export const StyledTitleContainer = styled.article`
   position: relative;
@@ -25,3 +25,32 @@ export const StyledTitleContainer = styled.article`
     }
   }
 `;
+
+export const StyledAWVDigitalInputWrap = styled.div`
+    display: flex;
+    flex-direction: column;
+
+    input {
+        width: 100%;
+        :nth-child(2) {
+            margin-bottom: ${pxToRem(24)};
+        }
+    }
+
+    ${DEVICE.tablet} {
+        input {
+            width: ${pxToRem(400)};
+        }
+    }
+
+    ${DEVICE.desktop} {
+        flex-direction: row;
+        width: ${pxToRem(880)};
+
+        input {
+            :nth-child(2) {
+                margin-bottom: ${pxToRem(0)};
+            }
+        }
+    }
+`
